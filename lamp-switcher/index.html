@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lamp Switcher</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="my-8">
+        <h1 class="text-center text-2xl font-bold uppercase">Lamp Switcher</h1>
+        <div class="container mx-auto mt-10">
+            <div class="flex justify-center gap-10">
+                <!-- lamp1 -->
+                <div class="bg-slate-700 p-5 rounded-lg shadow-lg">
+                    <img src="img/off.png" alt="" id="lamp1" />
+                    <div class="flex justify-center">
+                        <label
+                            class="relative inline-flex items-center cursor-pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                value=""
+                                class="sr-only peer"
+                                id="toogle1"
+                                onclick="switcher('lamp1','toogle1')"
+                            />
+                            <div
+                                class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                            ></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="bg-slate-700 p-5 rounded-lg shadow-lg">
+                    <img src="img/off.png" alt="" id="lamp2" />
+                    <div class="flex justify-center">
+                        <label
+                            class="relative inline-flex items-center cursor-pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                value=""
+                                class="sr-only peer"
+                                id="toogle2"
+                                onclick="switcher('lamp2','toogle2')"
+                            />
+                            <div
+                                class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                            ></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-5">
+            <div class="p-10 mt-10 bg-emerald-200">
+                <div class="flex justify-center gap-5">
+                    <h2 class="text-xl text-center font-semibold mb-5">
+                        Bedroom Lamp
+                    </h2>
+                    <div class="mt-1">
+                        <label
+                            class="relative inline-flex items-center cursor-pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                value=""
+                                class="sr-only peer"
+                                id="toogleGroup1"
+                                onclick="switcherGroup('toogleGroup1','bedroom')"
+                            />
+                            <div
+                                class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                            ></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-10">
+                    <!-- lamp 1 -->
+                    <div class="bg-slate-700 p-5 rounded-lg shadow-lg">
+                        <img class="bedroom" src="img/off.png" alt="" />
+                    </div>
+                    <!-- lamp 2 -->
+                    <div class="bg-slate-700 p-5 rounded-lg shadow-lg">
+                        <img class="bedroom" src="img/off.png" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="p-10 mt-10 bg-emerald-200">
+                <div class="flex justify-center gap-5">
+                    <h2 class="text-xl text-center font-semibold mb-5">
+                        Kitchen Lamp
+                    </h2>
+                    <div class="mt-1">
+                        <label
+                            class="relative inline-flex items-center cursor-pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                value=""
+                                class="sr-only peer"
+                                id="toogleGroup2"
+                                onclick="switcherGroup('toogleGroup2','kitchen')"
+                            />
+                            <div
+                                class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                            ></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-10">
+                    <!-- lamp 1 -->
+                    <div class="bg-slate-700 p-5 rounded-lg shadow-lg">
+                        <img class="kitchen" src="img/off.png" alt="" />
+                    </div>
+                    <!-- lamp 2 -->
+                    <div class="bg-slate-700 p-5 rounded-lg shadow-lg">
+                        <img class="kitchen" src="img/off.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
