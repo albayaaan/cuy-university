@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Auth Website</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="flex min-h-screen justify-center items-center gap-5">
+            <!-- login card -->
+            <div
+                id="loginCard"
+                class="w-1/2 lg:w-1/3 shadow-lg rounded-lg p-10"
+            >
+                <h2 class="text-2xl font-bold text-center mb-8">Login</h2>
+                <div class="mb-2">
+                    <label for="usernameLogin" class="block text-lg"
+                        >Username</label
+                    >
+                    <input
+                        type="text"
+                        name="usernameLogin"
+                        id="usernameLogin"
+                        class="w-full p-2 bg-slate-100 shadow-md"
+                    />
+                </div>
+                <div class="mb-6">
+                    <label for="passwordLogin" class="block text-lg"
+                        >Password</label
+                    >
+                    <input
+                        type="password"
+                        name="passwordLogin"
+                        id="passwordLogin"
+                        class="w-full p-2 bg-slate-100 shadow-md"
+                    />
+                </div>
+                <div class="text-center">
+                    <button
+                        id="buttonLogin"
+                        onclick="login()"
+                        class="px-4 py-2 bg-slate-100 shadow-md hover:opacity-80"
+                    >
+                        Login
+                    </button>
+                </div>
+            </div>
+            <!-- register card -->
+            <div
+                id="registerCard"
+                class="w-1/2 lg:w-1/3 shadow-lg rounded-lg p-10"
+            >
+                <h2 class="text-2xl font-bold text-center mb-8">Register</h2>
+                <div class="mb-2">
+                    <label for="usernameRegister" class="block text-lg"
+                        >Username</label
+                    >
+                    <input
+                        type="text"
+                        name="usernameRegister"
+                        id="usernameRegister"
+                        class="w-full p-2 bg-slate-100 shadow-md"
+                    />
+                </div>
+                <div class="mb-6">
+                    <label for="passwordRegister" class="block text-lg"
+                        >Password</label
+                    >
+                    <input
+                        type="password"
+                        name="passwordRegister"
+                        id="passwordRegister"
+                        class="w-full p-2 bg-slate-100 shadow-md"
+                    />
+                </div>
+                <div class="text-center">
+                    <button
+                        id="buttonLogin"
+                        onclick="register()"
+                        class="px-4 py-2 bg-slate-100 shadow-md hover:opacity-80"
+                    >
+                        Register
+                    </button>
+                </div>
+            </div>
+            <div>
+                <h2 id="textAdmin" class="text-3xl hidden">Welcome Admin</h2>
+                <h2 id="textMember" class="text-3xl hidden">Welcome Member</h2>
+                <div class="text-center mt-2">
+                    <button
+                        id="buttonLogout"
+                        onclick="logout()"
+                        class="px-4 py-2 bg-slate-100 shadow-md hover:opacity-80 hidden"
+                    >
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        let users = [
+            { username: "admin", password: "password" },
+            { username: "abyan", password: "password" },
+        ];
+
+        // checking data users in local storage
+        if (localStorage.getItem("users")) {
+            let data = localStorage.getItem("users");
+            users = JSON.parse(data);
+        } else {
+            localStorage.setItem("users", JSON.stringify(users));
+        }
+
+        // initial elements
+        const loginCard = document.getElementById("loginCard");
+        const registerCard = document.getElementById("registerCard");
+        const buttonLogout = document.getElementById("buttonLogout");
+        const textAdmin = document.getElementById("textAdmin");
+        const textMember = document.getElementById("textMember");
+
+        // check if page has login
+        if (localStorage.getItem("role")) {
+            const role = localStorage.getItem("role");
+            role == "admin"
+                ? successLogin(textAdmin, "admin")
+                : successLogin(textMember, "member");
+        }
+
+        // func where user has login
+        function successLogin(element, role) {
+            localStorage.setItem("role", role);
+            element.classList.remove("hidden");
+            buttonLogout.classList.remove("hidden");
+            loginCard.classList.add("hidden");
+            registerCard.classList.add("hidden");
+        }
+
+        // func login
+        function login() {
+            const username = document.getElementById("usernameLogin").value;
+            const password = document.getElementById("passwordLogin").value;
+
+            for (const user of users) {
+                if (username == "admin" && password == "password") {
+                    successLogin(textAdmin, "admin");
+                    return;
+                }
+                if (user.username == username) {
+                    if (user.password == password) {
+                        successLogin(textMember, "member");
+                        return;
+                    } else {
+                        alert("Your username or password is wrong");
+                        return;
+                    }
+                }
+            }
+            alert("You are not registered");
+        }
+
+        // func logout
+        function logout() {
+            localStorage.removeItem("role");
+            location.reload();
+        }
+
+        // func register
+        function register() {
+            const username = document.getElementById("usernameRegister").value;
+            const password = document.getElementById("passwordRegister").value;
+
+            if (username && password) {
+                let user = {
+                    username: username,
+                    password: password,
+                };
+                users.push(user);
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("Success register, please login");
+                location.reload();
+            } else {
+                alert("All register input required.");
+            }
+        }
+    </script>
+</html>
