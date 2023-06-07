@@ -36,17 +36,19 @@
                 >
                     Generate Password
                 </button>
-                <button
+                <a
+                    id="btnSave"
                     onclick="savePassword()"
-                    class="mt-2 w-full py-2 font-semibold bg-white rounded-md"
+                    class="mt-2 block text-center hover:cursor-pointer w-full py-2 font-semibold bg-white rounded-md"
                 >
                     Save Password
-                </button>
+                </a>
             </div>
         </div>
         <script>
             const lenPassword = document.getElementById("lenPassword");
             const divPassword = document.getElementById("divPassword");
+            const btnSave = document.getElementById("btnSave");
             const password = document.getElementById("password");
 
             function generatePassword(len) {
@@ -64,10 +66,29 @@
                 return newPassword;
             }
 
+            lenPassword.addEventListener("keypress", function (event) {
+                if (event.key == "Enter") {
+                    event.preventDefault();
+                    getPassword();
+                }
+            });
+
             function getPassword() {
                 let generated = generatePassword(lenPassword.value);
                 password.value = generated;
                 divPassword.classList.remove("hidden");
+            }
+
+            function savePassword() {
+                btnSave.setAttribute(
+                    "href",
+                    "data:text/plain;charset=utf-8," +
+                        encodeURIComponent(`My Password: ` + password.value)
+                );
+                btnSave.setAttribute(
+                    "download",
+                    Date.now().toString() + "password.txt"
+                );
             }
         </script>
     </body>
