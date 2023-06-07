@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Background Changer</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="transition duration-500">
+        <div
+            class="flex justify-center items-center flex-col h-screen w-screen"
+        >
+            <h1 id="title" class="text-4xl font-bold mb-12">
+                Background Changer
+            </h1>
+            <div class="flex gap-20 p-10 bg-white rounded-xl relative">
+                <div
+                    class="px-5 py-4 bg-orange-200 rounded-lg w-1/3 font-semibold text-lg text-center absolute -top-1/4 inset-x-1/3"
+                >
+                    pick a color
+                </div>
+                <div class="circle rounded-full h-16 w-16 bg-red-500"></div>
+                <div class="circle rounded-full h-16 w-16 bg-green-500"></div>
+                <div class="circle rounded-full h-16 w-16 bg-violet-500"></div>
+                <div
+                    class="circle dark rounded-full h-16 w-16 bg-slate-800"
+                ></div>
+                <div
+                    id="clear"
+                    class="px-5 py-4 bg-emerald-300 rounded-lg w-1/3 font-semibold text-lg text-center absolute -bottom-1/4 inset-x-1/3 hover:cursor-pointer"
+                >
+                    clear
+                </div>
+            </div>
+        </div>
+        <script>
+            const circles = document.querySelectorAll(".circle");
+            const title = document.getElementById("title");
+
+            circles.forEach((circle) => {
+                circle.addEventListener("click", function (element) {
+                    if (element.srcElement.classList.contains("dark")) {
+                        title.classList.add("text-white");
+                    } else {
+                        if (title.classList.contains("text-white")) {
+                            title.classList.remove("text-white");
+                        }
+                    }
+                    const { backgroundColor } = getComputedStyle(
+                        element.target
+                    );
+                    document.body.style.backgroundColor = backgroundColor;
+                });
+            });
+
+            const clear = document.getElementById("clear");
+            clear.addEventListener("click", function () {
+                title.classList.remove("text-white");
+                document.body.style.backgroundColor = null;
+            });
+        </script>
+    </body>
+</html>
